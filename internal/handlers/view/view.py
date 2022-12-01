@@ -1,10 +1,13 @@
 from flask import request
-from internal.domain import model
+from internal.domain import domain
 
 
 def turn_on():
     if request.is_json:
         req = request.get_json()
 
-        params = model.LightParams(tag=req.tag)
+        preset = domain.LightPreset(req.preset)
+        pass
+
+
 

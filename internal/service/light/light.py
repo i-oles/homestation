@@ -1,3 +1,5 @@
-from internal.domain import model
+from internal.domain import domain
 
-def turn_on(params: model.LightParams):
+
+def turn_on(params: domain.LightPreset):
+    pass
