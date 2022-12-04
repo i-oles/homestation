@@ -1,16 +1,16 @@
 from flask import request
+
 from internal.domain import domain
-
-from internal.repository.tiny_db.tiny_db import LightTag
-from internal.service.light import light
+from internal.service.light.light import Light
 
 
-def turn_on() -> :
+def turn_on():
     if request.is_json:
         req = request.get_json()
 
-        preset = LightTag(req.preset)
-        bulb_settings = light.turn_on(preset)
+        tag = domain.LightParams(req.tag)
+        bulb_settings = Light().turn_on(tag)
+        pass
 
 
 

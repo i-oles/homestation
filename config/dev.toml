@@ -1,0 +1,4 @@
+mode = "single"
+
+localDBpath = "/Users/ioles/PycharmProjects/homestation/db/db.json"
+serverDBpath = ""

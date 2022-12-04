@@ -1,9 +1,10 @@
 from flask import Flask
 from internal.handlers.view import view
 
+# Todo: add handling errors in all layers
+
 app = Flask(__name__)
 app.add_url_rule('/turn_on', 'turn_on', view.turn_on, methods="POST")
-
 
 
 if __name__ == '__main__':
