@@ -34,6 +34,6 @@ class TinyDbRepo(RepoInterface):
             to_turn_off=to_turn_off,
         )
 
-
-x = TinyDbRepo()
-print(x.turn_on(domain.LightParams(tag="cleaning")))
+#
+# x = TinyDbRepo()
+# print(x.turn_on(domain.LightParams(tag="cleaning")))

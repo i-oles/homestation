@@ -8,7 +8,7 @@ def turn_on():
     if request.is_json:
         req = request.get_json()
 
-        tag = domain.LightParams(req.tag)
+        tag = domain.LightParams(tag=req.tag)
         bulb_settings = Light().turn_on(tag)
         pass
 

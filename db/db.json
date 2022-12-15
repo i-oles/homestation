@@ -5,7 +5,7 @@
       "ip": "192.168.0.18",
       "type": "white",
       "preset": {
-        "single": 30,
+        "salon_main_lamp": 30,
         "cleaning": 100
       }
     },
@@ -14,6 +14,7 @@
       "ip": "192.168.0.22",
       "type": "white",
       "preset": {
+        "sofa_lamp": 30,
         "cozy": 10,
         "cleaning": 100
       }
@@ -23,7 +24,7 @@
       "ip": "192.168.0.23",
       "type": "white",
       "preset": {
-        "single": 30,
+        "table_lamp": 30,
         "cinema": 5,
         "cozy": 10,
         "cleaning": 100

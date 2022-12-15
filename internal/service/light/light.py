@@ -14,6 +14,7 @@ class Light(ServiceInterface):
 
         bulb_settings = repo_response.settings
 
+        # TODO: add slow turning on the light
         # TODO: check how bulbs works when type RGB
         for setting in bulb_settings:
             bulb = Bulb(setting.ip)
@@ -24,4 +25,4 @@ class Light(ServiceInterface):
 
 #
 # x = Light()
-# print(x.turn_on(domain.LightParams(tag="cinema")))
+# print(x.turn_on(domain.LightParams(tag="cozy")))
