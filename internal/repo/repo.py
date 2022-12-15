@@ -6,7 +6,7 @@ PRESET = "preset"
 IP = "ip"
 
 
-class RepositoryInterface(metaclass=ABCMeta):
+class RepoInterface(metaclass=ABCMeta):
     @abstractmethod
     def turn_on(self, params: domain.LightParams) -> list[domain.BulbSettings]:
         raise NotImplementedError

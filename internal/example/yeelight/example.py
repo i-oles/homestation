@@ -1,4 +1,5 @@
 from yeelight import Bulb, discover_bulbs
 
-x = discover_bulbs()[0]
+x = discover_bulbs()
 
+print(x)
