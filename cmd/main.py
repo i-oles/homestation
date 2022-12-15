@@ -1,8 +1,9 @@
 from flask import Flask
 from internal.handlers.view import view
 
-# Todo: add handling errors in all layers
-
+# TODO: make tests to all layers
+# TODO: add handling errors in all layers
+# FIXME: errors when running flask
 app = Flask(__name__)
 app.add_url_rule('/turn_on', 'turn_on', view.turn_on, methods="POST")
 
