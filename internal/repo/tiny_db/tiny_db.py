@@ -8,6 +8,7 @@ class TinyDbRepo(RepoInterface):
         settings = []
         to_turn_off = []
 
+        # TODO: move to main, change to env var
         db = TinyDB("/Users/ioles/PycharmProjects/homestation/db/db.json")
 
         for bulb in db:
