@@ -1,3 +1,4 @@
+import yeelight
 from yeelight import Bulb
 from internal.domain import domain
 from internal.repo.tiny_db.tiny_db import TinyDbRepo
@@ -8,8 +9,12 @@ class Light(ServiceInterface):
     def turn_on(self, params: domain.LightParams) -> list[domain.BulbSettings]:
         repo_response = TinyDbRepo().turn_on(params)
 
-        # FIXME: code breaks when bulb is switched off
-        [Bulb(bulb.ip).turn_off() for bulb in repo_response.to_turn_off]
+        # FIXME: Is there a way to make it works faster
+        for bulb in repo_response.to_turn_off:
+            try:
+                Bulb(bulb.ip).turn_off()
+            except yeelight.BulbException:
+                continue
 
         bulb_settings = repo_response.settings
 
