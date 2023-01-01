@@ -1,12 +1,16 @@
 from yeelight import Bulb
+
 from internal.domain import domain
-from internal.repo.tiny_db.tiny_db import TinyDbRepo
+from internal.repo.repo import RepoInterface
 from internal.service.service import ServiceInterface
 
 
 class Light(ServiceInterface):
+    def __init__(self, repo: RepoInterface):
+        self.repo = repo
+
     def turn_on(self, params: domain.LightParams) -> list[domain.BulbSettings]:
-        repo_response = TinyDbRepo().turn_on(params)
+        repo_response = self.repo.turn_on(params)
 
         # FIXME: code breaks when bulb is switched off
         [Bulb(bulb.ip).turn_off() for bulb in repo_response.to_turn_off]
@@ -22,6 +26,7 @@ class Light(ServiceInterface):
 
         return bulb_settings
 
-
-x = Light()
-print(x.turn_on(domain.LightParams(tag="cozy")))
+#
+# db = TinyDB(DB_PATH)
+# x = Light(TinyDbRepo(db))
+# print(x.turn_on(domain.LightParams(tag="cozy")))

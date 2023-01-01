@@ -1,17 +1,19 @@
-from tinydb import where, TinyDB
+from tinydb import TinyDB
+
+from config.config import DB_PATH
 from internal.domain import domain
-from internal.repo.repo import RepoInterface, PRESET, IP
+from internal.repo.repo import RepoInterface, IP
 
 
 class TinyDbRepo(RepoInterface):
+    def __init__(self, db: TinyDB):
+        self.db = db
+
     def turn_on(self, params: domain.LightParams) -> domain.RepoResponse:
         settings = []
         to_turn_off = []
 
-        # TODO: move to main, change to env var
-        db = TinyDB("/Users/ioles/PycharmProjects/homestation/db/db.json")
-
-        for bulb in db:
+        for bulb in self.db:
             presets = bulb.get("preset")
             tag = presets.get(params.tag)
             if tag:
@@ -34,6 +36,6 @@ class TinyDbRepo(RepoInterface):
             to_turn_off=to_turn_off,
         )
 
-#
-# x = TinyDbRepo()
-# print(x.turn_on(domain.LightParams(tag="cleaning")))
+
+x = TinyDbRepo(TinyDB(DB_PATH))
+print(x.turn_on(domain.LightParams(tag="cozy")))
