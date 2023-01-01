@@ -1,19 +1,17 @@
 from flask import request
 
 from internal.domain import domain
-from internal.service.light.light import Light
+from internal.service.service import ServiceInterface
 
 
-def turn_on():
-    if request.is_json:
-        req = request.get_json()
+class View:
+    def __init__(self, service: ServiceInterface):
+        self.service = service
 
-        tag = domain.LightParams(tag=req.tag)
-        bulb_settings = Light().turn_on(tag)
-        pass
+    def turn_on(self):
+        if request.is_json:
+            req = request.get_json()
 
-
-
-
-
-
+            tag = domain.LightParams(tag=req.tag)
+            bulb_settings = self.service.turn_on(tag)
+            pass
