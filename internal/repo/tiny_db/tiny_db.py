@@ -25,9 +25,7 @@ class TinyDbRepo(RepoInterface):
 
                 settings.append(s)
             else:
-                s = domain.BulbIP(
-                    ip=bulb[IP]
-                )
+                s = domain.BulbIP(ip=bulb[IP])
 
                 to_turn_off.append(s)
 

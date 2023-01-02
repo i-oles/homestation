@@ -26,7 +26,7 @@ class Light(ServiceInterface):
 
         return bulb_settings
 
-#
+
 # db = TinyDB(DB_PATH)
 # x = Light(TinyDbRepo(db))
 # print(x.turn_on(domain.LightParams(tag="cozy")))

@@ -1,4 +1,4 @@
-from yeelight import Bulb, discover_bulbs
+from yeelight import discover_bulbs
 
 x = discover_bulbs()
 
