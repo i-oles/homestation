@@ -1,7 +1,10 @@
+from tinydb import TinyDB
 from yeelight import Bulb
 
+from config.config import DB_PATH
 from internal.domain import domain
 from internal.repo.repo import RepoInterface
+from internal.repo.tiny_db.tiny_db import TinyDbRepo
 from internal.service.service import ServiceInterface
 
 
@@ -28,6 +31,6 @@ class Light(ServiceInterface):
         return bulb_settings
 
 
-# db = TinyDB(DB_PATH)
-# x = Light(TinyDbRepo(db))
-# print(x.turn_on(domain.LightParams(tag="cozy")))
+db = TinyDB(DB_PATH)
+x = Light(TinyDbRepo(db))
+print(x.turn_on(domain.LightParams(tag="cozy")))

@@ -2,7 +2,7 @@
   "_default": {
     "1": {
       "id": "salon_main_lamp",
-      "ip": "192.168.0.18",
+      "ip": "192.168.0.10",
       "type": "white",
       "preset": {
         "salon_main_lamp": 30,
