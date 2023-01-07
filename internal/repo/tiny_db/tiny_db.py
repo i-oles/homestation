@@ -15,21 +15,20 @@ class TinyDbRepo(RepoInterface):
 
         for bulb in self.db:
             presets = bulb.get("preset")
-            tag = presets.get(params.tag)
-            if tag:
-                s = domain.BulbSettings(
-                    ip=bulb[IP],
-                    type=bulb["type"],
-                    luminance=tag,
-                )
+            # TODO: add log info when not found preset
+            if presets:
+                tag = presets.get(params.tag)
+                if tag:
+                    setting = domain.BulbSettings(
+                        ip=bulb[IP],
+                        type=bulb["type"],
+                        luminance=tag,
+                    )
 
-                settings.append(s)
-            else:
-                s = domain.BulbIP(
-                    ip=bulb[IP]
-                )
-
-                to_turn_off.append(s)
+                    settings.append(setting)
+                else:
+                    ip = domain.BulbIP(ip=bulb[IP])
+                    to_turn_off.append(ip)
 
         return domain.RepoResponse(
             settings=settings,
@@ -37,5 +36,5 @@ class TinyDbRepo(RepoInterface):
         )
 
 
-x = TinyDbRepo(TinyDB(DB_PATH))
-print(x.turn_on(domain.LightParams(tag="cozy")))
+# x = TinyDbRepo(TinyDB(DB_PATH))
+# print(x.turn_on(domain.LightParams(tag="cozy")))

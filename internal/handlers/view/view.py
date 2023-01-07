@@ -14,4 +14,5 @@ class View:
 
             tag = domain.LightParams(tag=req.tag)
             bulb_settings = self.service.turn_on(tag)
+            print(bulb_settings)
             pass
