@@ -1,8 +1,10 @@
+import logging
+
 from tinydb import TinyDB
 
 from config.config import DB_PATH
 from internal.domain import domain
-from internal.repo.repo import RepoInterface, IP
+from internal.repo.repo import RepoInterface, IP, PRESET
 
 
 class TinyDbRepo(RepoInterface):
@@ -13,22 +15,32 @@ class TinyDbRepo(RepoInterface):
         settings = []
         to_turn_off = []
 
+        # TODO: should be fatal if some of this errors?
         for bulb in self.db:
-            presets = bulb.get("preset")
-            # TODO: add log info when not found preset
-            if presets:
-                tag = presets.get(params.tag)
-                if tag:
-                    setting = domain.BulbSettings(
-                        ip=bulb[IP],
-                        type=bulb["type"],
-                        luminance=tag,
-                    )
+            bulb_ip = bulb.get(IP)
+            if not bulb_ip:
+                logging.error(f"could not find 'ip_address' of bulb: {bulb}")
 
-                    settings.append(setting)
-                else:
-                    ip = domain.BulbIP(ip=bulb[IP])
-                    to_turn_off.append(ip)
+            presets = bulb.get(PRESET)
+            if not presets:
+                logging.error(f"could not find 'preset' of bulb: {bulb}")
+            else:
+                tag = presets.get(params.tag)
+                if not tag:
+                    to_turn_off.append(domain.BulbIP(ip=bulb_ip))
+                    continue
+
+                bulb_type = bulb.get("type")
+                if not bulb_type:
+                    logging.error(f"could not find 'type' of bulb: {bulb}")
+
+                setting = domain.BulbSettings(
+                    ip=bulb_ip,
+                    type=bulb_type,
+                    luminance=tag,
+                )
+
+                settings.append(setting)
 
         return domain.RepoResponse(
             settings=settings,
