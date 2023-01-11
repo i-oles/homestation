@@ -4,6 +4,7 @@ from internal.domain import domain
 
 PRESET = "preset"
 IP = "ip"
+TYPE = "type"
 
 
 class RepoInterface(metaclass=ABCMeta):

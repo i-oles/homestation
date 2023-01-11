@@ -4,7 +4,7 @@ from tinydb import TinyDB
 
 from config.config import DB_PATH
 from internal.domain import domain
-from internal.repo.repo import RepoInterface, IP, PRESET
+from internal.repo.repo import RepoInterface, IP, PRESET, TYPE
 
 
 class TinyDbRepo(RepoInterface):
@@ -13,9 +13,8 @@ class TinyDbRepo(RepoInterface):
 
     def turn_on(self, params: domain.LightParams) -> domain.RepoResponse:
         settings = []
-        to_turn_off = []
+        ips_to_turn_off = []
 
-        # TODO: should be fatal if some of this errors?
         for bulb in self.db:
             bulb_ip = bulb.get(IP)
             if not bulb_ip:
@@ -27,10 +26,10 @@ class TinyDbRepo(RepoInterface):
             else:
                 tag = presets.get(params.tag)
                 if not tag:
-                    to_turn_off.append(domain.BulbIP(ip=bulb_ip))
+                    ips_to_turn_off.append(bulb_ip)
                     continue
 
-                bulb_type = bulb.get("type")
+                bulb_type = bulb.get(TYPE)
                 if not bulb_type:
                     logging.error(f"could not find 'type' of bulb: {bulb}")
 
@@ -44,9 +43,9 @@ class TinyDbRepo(RepoInterface):
 
         return domain.RepoResponse(
             settings=settings,
-            to_turn_off=to_turn_off,
+            to_turn_off=ips_to_turn_off,
         )
 
 
-# x = TinyDbRepo(TinyDB(DB_PATH))
-# print(x.turn_on(domain.LightParams(tag="cozy")))
+x = TinyDbRepo(TinyDB(DB_PATH))
+print(x.turn_on(domain.LightParams(tag="cozy")))

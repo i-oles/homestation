@@ -17,11 +17,6 @@ class BulbSettings:
 
 
 @dataclass
-class BulbIP:
-    ip: str
-
-
-@dataclass
 class RepoResponse:
     settings: list[BulbSettings]
-    to_turn_off: list[BulbIP]
+    to_turn_off: list[str]

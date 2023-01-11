@@ -17,7 +17,7 @@ class Light(ServiceInterface):
         # FIXME: check empty repo response
 
         # FIXME: code breaks when bulb is switched off
-        [Bulb(bulb.ip).turn_off() for bulb in repo_response.to_turn_off]
+        [Bulb(bulb).turn_off() for bulb in repo_response.to_turn_off]
 
         bulb_settings = repo_response.settings
 
@@ -31,6 +31,6 @@ class Light(ServiceInterface):
         return bulb_settings
 
 
-db = TinyDB(DB_PATH)
-x = Light(TinyDbRepo(db))
-print(x.turn_on(domain.LightParams(tag="cozy")))
+# db = TinyDB(DB_PATH)
+# x = Light(TinyDbRepo(db))
+# print(x.turn_on(domain.LightParams(tag="cozy")))
