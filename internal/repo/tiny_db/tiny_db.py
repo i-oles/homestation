@@ -16,36 +16,35 @@ class TinyDbRepo(RepoInterface):
         ips_to_turn_off = []
 
         for bulb in self.db:
-            bulb_ip = bulb.get(IP)
-            if not bulb_ip:
+            bulb_type = bulb.get(TYPE, "white")
+
+            try:
+                bulb_ip = bulb[IP]
+            except KeyError:
                 logging.error(f"could not find 'ip_address' of bulb: {bulb}")
-
-            presets = bulb.get(PRESET)
-            if not presets:
-                logging.error(f"could not find 'preset' of bulb: {bulb}")
             else:
-                tag = presets.get(params.tag)
-                if not tag:
-                    ips_to_turn_off.append(bulb_ip)
-                    continue
+                try:
+                    presets = bulb[PRESET]
+                except KeyError:
+                    logging.error(f"could not find 'preset' of bulb: {bulb}")
+                else:
+                    tag = presets.get(params.tag)
+                    if not tag:
+                        ips_to_turn_off.append(bulb_ip)
+                        continue
+                    else:
+                        setting = domain.BulbSettings(
+                            ip=bulb_ip,
+                            type=bulb_type,
+                            luminance=tag,
+                        )
 
-                bulb_type = bulb.get(TYPE)
-                if not bulb_type:
-                    logging.error(f"could not find 'type' of bulb: {bulb}")
-
-                setting = domain.BulbSettings(
-                    ip=bulb_ip,
-                    type=bulb_type,
-                    luminance=tag,
-                )
-
-                settings.append(setting)
+                    settings.append(setting)
 
         return domain.RepoResponse(
             settings=settings,
             to_turn_off=ips_to_turn_off,
         )
 
-
-x = TinyDbRepo(TinyDB(DB_PATH))
-print(x.turn_on(domain.LightParams(tag="cozy")))
+# x = TinyDbRepo(TinyDB(DB_PATH))
+# print(x.turn_on(domain.LightParams(tag="cozy")))

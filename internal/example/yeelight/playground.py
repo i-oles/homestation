@@ -2,4 +2,5 @@ from yeelight import discover_bulbs
 
 x = discover_bulbs()
 
-print(x)
+if __name__ == "__main__":
+    print(x)
