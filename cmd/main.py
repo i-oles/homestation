@@ -17,7 +17,8 @@ service = Light(repo)
 view = View(service)
 
 app.add_url_rule("/turn_on", "turn_on", view.turn_on, methods=["POST"])
+app.add_url_rule("/turn_off", "turn_off", view.turn_off, methods=["POST"])
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8123, debug=True)
+    app.run(host="0.0.0.0", port=7123, debug=True)

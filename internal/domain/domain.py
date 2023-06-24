@@ -1,12 +1,15 @@
 from dataclasses import dataclass
 
-IP = "ip"
+
+@dataclass
+class TurnOnParams:
+    # TODO: here will be another field for bulb color settings
+    tag: str
 
 
 @dataclass
-class LightParams:
-    # TODO: here will be another field for bulb color settings
-    tag: str
+class TurnOffParams:
+    ids: list[str]
 
 
 @dataclass

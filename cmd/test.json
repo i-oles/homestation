@@ -1,6 +1,24 @@
 [
   {
-    'ip': '192.168.0.10',
+    'ip': '192.168.0.25',
+    'port': 55443,
+    'capabilities': {
+      'id': '0x000000001be3b3cf',
+      'model': 'monoa',
+      'fw_ver': '9',
+      'support': 'get_prop set_default set_power toggle set_bright set_scene cron_add cron_get cron_del start_cf stop_cf set_name set_adjust adjust_bright',
+      'power': 'on',
+      'bright': '100',
+      'color_mode': '2',
+      'ct': '2700',
+      'rgb': '0',
+      'hue': '0',
+      'sat': '0',
+      'name': ''
+    }
+  },
+  {
+    'ip': '192.168.0.26',
     'port': 55443,
     'capabilities': {
       'id': '0x000000001be46fb3',
@@ -18,25 +36,7 @@
     }
   },
   {
-    'ip': '192.168.0.21',
-    'port': 55443,
-    'capabilities': {
-      'id': '0x000000001be3b3cf',
-      'model': 'monoa',
-      'fw_ver': '9',
-      'support': 'get_prop set_default set_power toggle set_bright set_scene cron_add cron_get cron_del start_cf stop_cf set_name set_adjust adjust_bright',
-      'power': 'on',
-      'bright': '10',
-      'color_mode': '2',
-      'ct': '2700',
-      'rgb': '0',
-      'hue': '0',
-      'sat': '0',
-      'name': ''
-    }
-  },
-  {
-    'ip': '192.168.0.20',
+    'ip': '192.168.0.24',
     'port': 55443,
     'capabilities': {
       'id': '0x000000001be3a66e',
@@ -44,7 +44,7 @@
       'fw_ver': '9',
       'support': 'get_prop set_default set_power toggle set_bright set_scene cron_add cron_get cron_del start_cf stop_cf set_name set_adjust adjust_bright',
       'power': 'on',
-      'bright': '10',
+      'bright': '100',
       'color_mode': '2',
       'ct': '2700',
       'rgb': '0',

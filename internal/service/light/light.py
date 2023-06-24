@@ -1,3 +1,5 @@
+import time
+
 from tinydb import TinyDB
 from yeelight import Bulb
 
@@ -12,7 +14,7 @@ class Light(ServiceInterface):
     def __init__(self, repo: RepoInterface):
         self.repo = repo
 
-    def turn_on(self, params: domain.LightParams) -> list[domain.BulbSettings]:
+    def turn_on(self, params: domain.TurnOnParams) -> list[domain.BulbSettings]:
         repo_response = self.repo.turn_on(params)
         # FIXME: check empty repo response
 
@@ -30,7 +32,15 @@ class Light(ServiceInterface):
 
         return bulb_settings
 
+    def turn_off(self, params: domain.TurnOffParams) -> list:
+        ips_to_turn_off = self.repo.turn_off(params)
+
+        [Bulb(bulb).turn_off() for bulb in ips_to_turn_off]
+
+        return ips_to_turn_off
 
 db = TinyDB(DB_PATH)
 x = Light(TinyDbRepo(db))
-print(x.turn_on(domain.LightParams(tag="table_lamp")))
+
+# print(x.turn_on(domain.TurnOnParams(tag="cleaning")))
+print(x.turn_off(domain.TurnOffParams(ids=["table_lamp", "sofa_lamp", "salon_main_lamp"])))
