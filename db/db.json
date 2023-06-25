@@ -2,7 +2,7 @@
   "_default": {
     "1": {
       "id": "salon_main_lamp",
-      "ip": "192.168.0.10",
+      "ip": "192.168.0.26",
       "type": "white",
       "preset": {
         "salon_main_lamp": 30,
@@ -11,7 +11,7 @@
     },
     "2": {
       "id": "sofa_lamp",
-      "ip": "192.168.0.22",
+      "ip": "192.168.0.25",
       "type": "white",
       "preset": {
         "sofa_lamp": 30,
@@ -21,7 +21,7 @@
     },
     "3": {
       "id": "table_lamp",
-      "ip": "192.168.0.23",
+      "ip": "192.168.0.24",
       "type": "white",
       "preset": {
         "table_lamp": 30,

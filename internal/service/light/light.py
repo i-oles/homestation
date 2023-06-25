@@ -12,12 +12,12 @@ class Light(ServiceInterface):
     def __init__(self, repo: RepoInterface):
         self.repo = repo
 
-    def turn_on(self, params: domain.LightParams) -> list[domain.BulbSettings]:
+    def turn_on(self, params: domain.TurnOnParams) -> list[domain.BulbSettings]:
         repo_response = self.repo.turn_on(params)
         # FIXME: check empty repo response
 
         # FIXME: code breaks when bulb is switched off
-        [Bulb(bulb.ip).turn_off() for bulb in repo_response.to_turn_off]
+        [Bulb(bulb).turn_off() for bulb in repo_response.to_turn_off]
 
         bulb_settings = repo_response.settings
 
@@ -30,7 +30,16 @@ class Light(ServiceInterface):
 
         return bulb_settings
 
+    def turn_off(self, params: domain.TurnOffParams) -> list:
+        ips_to_turn_off = self.repo.turn_off(params)
+
+        [Bulb(bulb).turn_off() for bulb in ips_to_turn_off]
+
+        return ips_to_turn_off
+
 
 db = TinyDB(DB_PATH)
 x = Light(TinyDbRepo(db))
-print(x.turn_on(domain.LightParams(tag="cozy")))
+
+print(x.turn_on(domain.TurnOnParams(tag="cinema")))
+# print(x.turn_off(domain.TurnOffParams(ids=["table_lamp", "sofa_lamp", "salon_main_lamp"])))

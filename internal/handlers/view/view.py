@@ -12,7 +12,14 @@ class View:
         if request.is_json:
             req = request.get_json()
 
-            tag = domain.LightParams(tag=req.tag)
+            tag = domain.TurnOnParams(tag=req.tag)
             bulb_settings = self.service.turn_on(tag)
             print(bulb_settings)
-            pass
+
+    def turn_off(self):
+        if request.is_json:
+            req = request.get_json()
+
+            ids = domain.TurnOffParams(ids=req.ids)
+            ids_to_turn_off = self.service.turn_off(ids)
+            print(ids_to_turn_off)
