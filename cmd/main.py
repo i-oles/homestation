@@ -13,7 +13,7 @@ homestation_app = Flask(__name__)
 
 @homestation_app.route("/")
 def home():
-    return "<html><body><h1 style='color:red'>I am hosted on Raspberry Pi !!!</h1></body></html>"
+    return "<html><body><h1 style='color:blue'>I am hosted on Raspberry Pi !!!</h1></body></html>"
 
 
 db = TinyDB(config.DB_PATH)
