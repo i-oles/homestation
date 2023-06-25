@@ -1,5 +1,3 @@
-import time
-
 from tinydb import TinyDB
 from yeelight import Bulb
 
@@ -39,8 +37,9 @@ class Light(ServiceInterface):
 
         return ips_to_turn_off
 
+
 db = TinyDB(DB_PATH)
 x = Light(TinyDbRepo(db))
 
-# print(x.turn_on(domain.TurnOnParams(tag="cleaning")))
-print(x.turn_off(domain.TurnOffParams(ids=["table_lamp", "sofa_lamp", "salon_main_lamp"])))
+print(x.turn_on(domain.TurnOnParams(tag="cinema")))
+# print(x.turn_off(domain.TurnOffParams(ids=["table_lamp", "sofa_lamp", "salon_main_lamp"])))

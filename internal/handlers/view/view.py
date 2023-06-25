@@ -23,4 +23,3 @@ class View:
             ids = domain.TurnOffParams(ids=req.ids)
             ids_to_turn_off = self.service.turn_off(ids)
             print(ids_to_turn_off)
-

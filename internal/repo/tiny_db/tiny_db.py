@@ -18,28 +18,23 @@ class TinyDbRepo(RepoInterface):
         for bulb in self.db:
             bulb_type = bulb.get(TYPE, DEFAULT_TYPE)
 
-            try:
-                bulb_ip = bulb[IP]
-            except KeyError:
-                logging.error(f"could not find 'ip_address' of bulb: {bulb}")
-            else:
-                try:
-                    presets = bulb[PRESET]
-                except KeyError:
-                    logging.error(f"could not find 'preset' of bulb: {bulb}")
-                else:
-                    tag = presets.get(params.tag)
-                    if not tag:
-                        ips_to_turn_off.append(bulb_ip)
-                        continue
-                    else:
-                        setting = domain.BulbSettings(
-                            ip=bulb_ip,
-                            type=bulb_type,
-                            luminance=tag,
-                        )
+            bulb_ip = bulb.get(IP)
+            if not bulb_ip:
 
-                    settings.append(setting)
+                logging.error(f"could not find 'ip_address' of bulb: {bulb}")
+
+            tag = bulb.get(PRESET).get(params.tag)
+            if not tag:
+                ips_to_turn_off.append(bulb_ip)
+                continue
+
+            settings.append(
+                domain.BulbSettings(
+                    ip=bulb_ip,
+                    type=bulb_type,
+                    luminance=tag,
+                )
+            )
 
         return domain.RepoResponse(
             settings=settings,
