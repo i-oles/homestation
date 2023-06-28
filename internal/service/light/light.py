@@ -1,3 +1,5 @@
+from typing import List
+
 from tinydb import TinyDB
 from yeelight import Bulb
 
@@ -12,7 +14,7 @@ class Light(ServiceInterface):
     def __init__(self, repo: RepoInterface):
         self.repo = repo
 
-    def turn_on(self, params: domain.TurnOnParams) -> list[domain.BulbSettings]:
+    def turn_on(self, params: domain.TurnOnParams) -> List[domain.BulbSettings]:
         repo_response = self.repo.turn_on(params)
         # FIXME: check empty repo response
 

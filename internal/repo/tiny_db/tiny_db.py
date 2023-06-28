@@ -1,4 +1,5 @@
 import logging
+from typing import List
 
 from tinydb import TinyDB
 
@@ -12,16 +13,21 @@ class TinyDbRepo(RepoInterface):
         self.db = db
 
     def turn_on(self, params: domain.TurnOnParams) -> domain.RepoResponse:
-        settings = []
-        ips_to_turn_off = []
+        settings: List[domain.BulbSettings] = []
+        ips_to_turn_off: List[str] = []
 
         for bulb in self.db:
+            if bulb is None:
+                continue
+
             bulb_type = bulb.get(TYPE, DEFAULT_TYPE)
 
             bulb_ip = bulb.get(IP)
-            if not bulb_ip:
+            if bulb_ip is None:
+                continue
 
-                logging.error(f"could not find 'ip_address' of bulb: {bulb}")
+            # if not bulb_ip:
+            #     logging.error(f"could not find 'ip_address' of bulb: {bulb}")
 
             tag = bulb.get(PRESET).get(params.tag)
             if not tag:
