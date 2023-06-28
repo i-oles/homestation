@@ -1,5 +1,4 @@
 from abc import abstractmethod, ABCMeta
-
 from internal.domain import domain
 
 DEFAULT_TYPE = "white"
