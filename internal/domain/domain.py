@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import List
 
 
 @dataclass
@@ -9,7 +10,7 @@ class TurnOnParams:
 
 @dataclass
 class TurnOffParams:
-    ids: list[str]
+    ids: List[str]
 
 
 @dataclass
@@ -21,5 +22,5 @@ class BulbSettings:
 
 @dataclass
 class RepoResponse:
-    settings: list[BulbSettings]
-    to_turn_off: list[str]
+    settings: List[BulbSettings]
+    to_turn_off: List[str]

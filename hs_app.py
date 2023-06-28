@@ -30,4 +30,4 @@ homestation_app.add_url_rule(
 )
 
 if __name__ == "__main__":
-    homestation_app.run(host="0.0.0.0", debug=True)
+    homestation_app.run(host="0.0.0.0", port=6000, debug=True)
