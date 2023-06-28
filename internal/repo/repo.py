@@ -13,5 +13,6 @@ class RepoInterface(metaclass=ABCMeta):
     def turn_on(self, params: domain.TurnOnParams) -> domain.RepoResponse:
         raise NotImplementedError
 
+    @abstractmethod
     def turn_off(self, params: domain.TurnOffParams) -> list:
         raise NotImplementedError
