@@ -3,7 +3,7 @@ from typing import List
 from tinydb import TinyDB
 from yeelight import Bulb
 
-from config.config import DB_PATH
+from config.config import DB_FILE_NAME
 from internal.domain import domain
 from internal.repo.repo import RepoInterface
 from internal.repo.tiny_db.tiny_db import TinyDbRepo
@@ -40,7 +40,7 @@ class Light(ServiceInterface):
         return ips_to_turn_off
 
 
-db = TinyDB(DB_PATH)
+db = TinyDB(DB_FILE_NAME)
 x = Light(TinyDbRepo(db))
 
 print(x.turn_on(domain.TurnOnParams(tag="cinema")))

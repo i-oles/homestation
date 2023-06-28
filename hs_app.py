@@ -5,6 +5,7 @@ from internal.handlers.view.view import View
 from config import config
 from internal.repo.tiny_db.tiny_db import TinyDbRepo
 from internal.service.light.light import Light
+import os
 
 # TODO: make tests to all layers
 # TODO: add handling errors in all layers
@@ -16,7 +17,9 @@ def home():
     return "<html><body><h1 style='color:blue'>I am hosted on Raspberry Pi !!!</h1></body></html>"
 
 
-db = TinyDB(config.DB_PATH)
+absolute_path = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(absolute_path, config.DB_FILE_NAME)
+db = TinyDB(db_path)
 
 repo = TinyDbRepo(db)
 service = Light(repo)

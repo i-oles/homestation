@@ -1,1 +1,1 @@
-DB_PATH = "/Users/ioles/PycharmProjects/homestation/db/db.json"
+DB_FILE_NAME = "db.json"
