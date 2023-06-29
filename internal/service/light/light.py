@@ -43,5 +43,5 @@ class Light(ServiceInterface):
 db = TinyDB(DB_FILE_NAME)
 x = Light(TinyDbRepo(db))
 
-print(x.turn_on(domain.TurnOnParams(tag="cinema")))
+print(x.turn_on(domain.TurnOnParams(tag="sofa_lamp")))
 # print(x.turn_off(domain.TurnOffParams(ids=["table_lamp", "sofa_lamp", "salon_main_lamp"])))

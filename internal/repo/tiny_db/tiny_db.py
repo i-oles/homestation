@@ -64,7 +64,3 @@ class TinyDbRepo(RepoInterface):
                     ips_to_turn_off.append(bulb_ip)
 
         return ips_to_turn_off
-
-
-# x = TinyDbRepo(TinyDB(DB_PATH))
-# print(x.turn_on(domain.LightParams(tag="cozy")))
