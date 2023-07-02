@@ -15,3 +15,6 @@ mypy: black
 	mypy ../homestation/hs_app.py
 	mypy ../homestation/config
 	mypy ../homestation/internal
+
+deploy:
+    run deploy.sh
