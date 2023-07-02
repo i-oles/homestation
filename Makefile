@@ -17,4 +17,4 @@ mypy: black
 	mypy ../homestation/internal
 
 deploy:
-    ./deploy.sh
+	./deploy.sh
