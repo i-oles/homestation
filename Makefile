@@ -1,5 +1,5 @@
 run:
-	python3 cmd/main.py
+	python3 hs_app.py
 
 black:
 	black ../homestation/hs_app.py
