@@ -7,4 +7,4 @@ ssh -t pi@192.168.0.42 "cd /home/pi/homestation && \
 git pull && \
 
 # Reboot the Raspberry Pi
-sudo reboot
+sudo reboot"
