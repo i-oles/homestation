@@ -37,10 +37,3 @@ class Light(ServiceInterface):
         [Bulb(bulb).turn_off() for bulb in ips_to_turn_off]
 
         return ips_to_turn_off
-
-
-db = TinyDB("db.json")
-x = Light(TinyDbRepo(db))
-
-# print(x.turn_on(domain.TurnOnParams(tag="sofa_lamp")))
-# print(x.turn_off(domain.TurnOffParams(ids=["table_lamp", "sofa_lamp", "salon_main_lamp"])))
