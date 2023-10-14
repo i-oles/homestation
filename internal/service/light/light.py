@@ -1,11 +1,8 @@
 from typing import List
 
-from tinydb import TinyDB
 from yeelight import Bulb
-
 from internal.domain import domain
 from internal.repo.repo import RepoInterface
-from internal.repo.tiny_db.tiny_db import TinyDbRepo
 from internal.service.service import ServiceInterface
 
 
