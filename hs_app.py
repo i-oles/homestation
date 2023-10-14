@@ -2,7 +2,7 @@ from flask import Flask, request, json, Response
 from tinydb import TinyDB
 
 from internal.domain import domain
-from config import config
+from config.config import DB_FILE_NAME
 from internal.repo.tiny_db.tiny_db import TinyDbRepo
 from internal.service.light.light import Light
 import os
@@ -12,7 +12,8 @@ import os
 homestation_app = Flask(__name__)
 
 absolute_path = os.path.dirname(os.path.abspath(__file__))
-db_path = os.path.join(absolute_path, config.DB_FILE_NAME)
+db_path = os.path.join(absolute_path, DB_FILE_NAME)
+print(db_path)
 db = TinyDB(db_path)
 
 repo = TinyDbRepo(db)
