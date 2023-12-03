@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM hypriot/rpi-python:3.7-slim
+FROM arm32v6/python:3.7.10-alpine3.13
 
 WORKDIR /homestation-docker
 
