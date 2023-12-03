@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM balenalib/raspberry-pi-debian-python:latest
+FROM hypriot/rpi-python:3.7-slim
 
 WORKDIR /homestation-docker
 
