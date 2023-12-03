@@ -21,7 +21,7 @@ service = Light(repo)
 
 @homestation_app.route("/")
 def home():
-    return "<html><body><h1 style='color:blue'>I am hosted on Raspberry Pi !!!</h1></body></html>"
+    return "<h1 style='color:blue'>I am hosted on Raspberry Pi !!!</h1>"
 
 
 @homestation_app.route("/turn_on", methods=["POST"])
@@ -55,4 +55,4 @@ def turn_off():
 
 
 if __name__ == "__main__":
-    homestation_app.run(host="0.0.0.0", port=5055, debug=True)
+    homestation_app.run(debug=True)
