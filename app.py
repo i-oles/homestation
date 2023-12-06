@@ -28,15 +28,11 @@ def home():
 def turn_on():
     if request.is_json:
         req = request.get_json()
-        tag = domain.TurnOnParams(
-            tag=req['tag']
-        )
+        tag = domain.TurnOnParams(tag=req["tag"])
         bulb_settings = service.turn_on(tag)
 
         return Response(
-            response=json.dumps(bulb_settings),
-            status=200,
-            mimetype="text/plain"
+            response=json.dumps(bulb_settings), status=200, mimetype="text/plain"
         )
 
 
@@ -44,15 +40,11 @@ def turn_on():
 def turn_off():
     if request.is_json:
         req = request.get_json()
-        tag = domain.TurnOffParams(
-            ids=req['ids']
-        )
+        tag = domain.TurnOffParams(ids=req["ids"])
         ips_to_turn_off = service.turn_off(tag)
 
         return Response(
-            response=json.dumps(ips_to_turn_off),
-            status=200,
-            mimetype="text/plain"
+            response=json.dumps(ips_to_turn_off), status=200, mimetype="text/plain"
         )
 
 

@@ -1,18 +1,18 @@
 run:
-	python3 hs_app.py
+	python3 app.py
 
 black:
-	black ../homestation/hs_app.py
+	black ../homestation/app.py
 	black ../homestation/config
 	black ../homestation/internal
 
 lint: black
-	pylama ../homestation/hs_app.py
+	pylama ../homestation/app.py
 	pylama ../homestation/config
 	pylama ../homestation/internal
 
 mypy: black
-	mypy ../homestation/hs_app.py
+	mypy ../homestation/app.py
 	mypy ../homestation/config
 	mypy ../homestation/internal
 
