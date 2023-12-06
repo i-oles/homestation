@@ -1,43 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Flask HTMX ALPINE App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <!-- HTMX -->
-    <script src="https://unpkg.com/htmx.org@1.5.0"></script>
-    <style>
-        body{
-            padding: 20px;
-        }
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        tr.htmx-swapping td {
-            opacity: 0;
-            transition: opacity 0.5s ease-out;
-        }
-
-        td, th {
-            border: 1px solid #383737;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
 </head>
-
 <body>
-<h1>Homestation</h1>
-{%for bulb in bulbs%}
-<button class="btn btn-primary" hx-get="/turn_on">{{bulb.id}}</button>
-{%endfor%}
-</body>
+    <h1 style='color:blue'>I am hosted on Raspberry Pi !!!</h1>
 
+    <form id="cozyForm">
+        <button type="button" onclick="sendRequest('cozy')">Cozy</button>
+    </form>
+
+    <form id="cinemaForm">
+        <button type="button" onclick="sendRequest('cinema')">Cinema</button>
+    </form>
+
+    <script>
+        function sendRequest(tag) {
+            fetch('/turn_on', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ tag: tag }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Button Clicked: ' + data.tag);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
 </html>

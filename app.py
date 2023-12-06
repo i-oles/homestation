@@ -1,4 +1,4 @@
-from flask import Flask, request, json, Response
+from flask import Flask, request, json, Response, render_template
 from tinydb import TinyDB
 
 from internal.domain import domain
@@ -21,7 +21,7 @@ service = Light(repo)
 
 @homestation_app.route("/")
 def home():
-    return "<h1 style='color:blue'>I am hosted on Raspberry Pi !!!</h1>"
+    return render_template("index.html")
 
 
 @homestation_app.route("/turn_on", methods=["POST"])
@@ -44,7 +44,9 @@ def turn_on():
 def turn_off():
     if request.is_json:
         req = request.get_json()
-        tag = domain.TurnOffParams(ids=req['ids'])
+        tag = domain.TurnOffParams(
+            ids=req['ids']
+        )
         ips_to_turn_off = service.turn_off(tag)
 
         return Response(

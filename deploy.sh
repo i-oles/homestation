@@ -13,7 +13,4 @@ sudo docker build --tag homestation-docker . && \
 sudo docker ps -aq | xargs docker stop | xargs docker rm && \
 
 # Run the docker image
-sudo docker run -d -p 8000:5000 homestation-docker && \
-
-# Reboot the Raspberry Pi
-sudo reboot"
+sudo docker run -d -p 5000:5000 homestation-docker"
