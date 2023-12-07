@@ -10,7 +10,7 @@ git pull && \
 sudo docker build --tag homestation-docker . && \
 
 # Stop all running containers
-sudo docker ps -aq | xargs docker stop | xargs docker rm && \
+sudo docker ps -aq | sudo xargs docker stop | sudo xargs docker rm && \
 
 # Run the docker image
 sudo docker run -d -p 5000:5000 homestation-docker"
