@@ -9,7 +9,7 @@
 <body>
     {%for t in possible_tags%}
         <form id="{{ t }}Form">
-            <button type="button" onclick="sendRequest('{{ t }}')">{{ t }}</button>
+            <button style="color: red" type="button" onclick="sendRequest('{{ t }}')">{{ t }}</button>
         </form>
     {%endfor%}
 
@@ -28,6 +28,5 @@
             });
         }
     </script>
-
 </body>
 </html>
