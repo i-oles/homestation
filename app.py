@@ -1,11 +1,14 @@
 from flask import Flask, request, json, Response, render_template
 from tinydb import TinyDB
+from yeelight import discover_bulbs
 
 from internal.domain import domain
 from config import config
-from internal.repo.tiny_db.tiny_db import TinyDbRepo
-from internal.service.light.light import Light
+from internal.light.repo.tiny_db.tiny_db import TinyDbRepo
+from internal.light.service.light.light import Light
 import os
+
+from internal.repository.tinydb.repository import TinyDBRepository
 
 # TODO: make tests to all layers
 # TODO: add handling errors in all layers
@@ -16,12 +19,40 @@ db_path = os.path.join(absolute_path, config.DB_FILE_NAME)
 db = TinyDB(db_path)
 
 repo = TinyDbRepo(db)
+light_repo = TinyDBRepository(db)
 service = Light(repo)
+
+
+def make_dict_with_counts(some_list: list) -> dict:
+    dict_with_counts = dict()
+    for item in some_list:
+        if item in dict_with_counts:
+            dict_with_counts[item] += 1
+        else:
+            dict_with_counts[item] = 1
+    return dict_with_counts
 
 
 @homestation_app.route("/")
 def home():
-    return render_template("index.html")
+    possible_tags = set()
+
+    all_tags_from_db = light_repo.get_all_tags()
+    all_active_tags = list()
+
+    active_bulbs = discover_bulbs()
+    for bulb in active_bulbs:
+        tags = light_repo.get_all_tags_by_ip(bulb.get("ip"))
+        [all_active_tags.append(tag) for tag in tags]
+
+    db_tag_count = make_dict_with_counts(all_tags_from_db)
+    active_tag_count = make_dict_with_counts(all_active_tags)
+
+    for tag, value in active_tag_count.items():
+        if value == db_tag_count.get(tag):
+            possible_tags.add(tag)
+
+    return render_template("index.html", possible_tags=possible_tags)
 
 
 @homestation_app.route("/turn_on", methods=["POST"])

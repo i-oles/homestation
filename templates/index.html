@@ -7,13 +7,11 @@
     <title>Home</title>
 </head>
 <body>
-    <form id="cozyForm">
-        <button type="button" onclick="sendRequest('cozy')">Cozy</button>
-    </form>
-
-    <form id="cinemaForm">
-        <button type="button" onclick="sendRequest('cinema')">Cinema</button>
-    </form>
+    {%for t in possible_tags%}
+        <form id="{{ t }}Form">
+            <button type="button" onclick="sendRequest('{{ t }}')">{{ t }}</button>
+        </form>
+    {%endfor%}
 
     <script>
         function sendRequest(tag) {
@@ -25,13 +23,11 @@
                 body: JSON.stringify({ tag: tag }),
             })
             .then(response => response.json())
-            .then(data => {
-                alert('Button Clicked: ' + data.tag);
-            })
             .catch((error) => {
                 console.error('Error:', error);
             });
         }
     </script>
+
 </body>
 </html>

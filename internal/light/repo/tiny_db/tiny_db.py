@@ -4,8 +4,8 @@ from typing import List
 from tinydb import TinyDB
 
 from internal.domain import domain
-from internal.repo.repo import RepoInterface, IP, ID, PRESET, TYPE
-from internal.service.service import DEFAULT_TYPE
+from internal.light.repo.repo import RepoInterface, IP, ID, PRESET, TYPE
+from internal.light.service.service import DEFAULT_TYPE
 
 
 class TinyDbRepo(RepoInterface):

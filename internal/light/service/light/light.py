@@ -2,8 +2,8 @@ from typing import List
 
 from yeelight import Bulb
 from internal.domain import domain
-from internal.repo.repo import RepoInterface
-from internal.service.service import ServiceInterface
+from internal.light.repo.repo import RepoInterface
+from internal.light.service.service import ServiceInterface
 
 
 class Light(ServiceInterface):
