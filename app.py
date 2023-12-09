@@ -4,11 +4,10 @@ from yeelight import discover_bulbs
 
 from internal.domain import domain
 from config import config
-from internal.light.repo.tiny_db.tiny_db import TinyDbRepo
-from internal.light.service.light.light import Light
+from internal.service.light.light import Light
 import os
 
-from internal.repository.tinydb.repository import TinyDBRepository
+from internal.repository.bulb.tinydb.repository import BulbRepo
 
 # TODO: make tests to all layers
 # TODO: add handling errors in all layers
@@ -18,14 +17,13 @@ absolute_path = os.path.dirname(os.path.abspath(__file__))
 db_path = os.path.join(absolute_path, config.DB_FILE_NAME)
 db = TinyDB(db_path)
 
-# todo: here should be only one repo
-repo = TinyDbRepo(db)
-light_repo = TinyDBRepository(db)
-service = Light(repo)
+light_repo = BulbRepo(db)
+service = Light(light_repo)
 
 
 @homestation_app.route("/")
 def home():
+    # TODO: here somewhere should be a state update
     possible_tags = set()
 
     all_tags_from_db = light_repo.get_all_tags()
@@ -45,10 +43,29 @@ def home():
 
     return render_template("index.html", possible_tags=possible_tags)
 
-#TODO: turn on, szuould be toggle, and should be able to turn on and off
-#TODO: you should also check state of active bulbs.
+
+@homestation_app.route("/toggle_single", methods=["POST"])
+def toggle_single():
+    if request.is_json:
+        req = request.get_json()
+
+        tag = domain.ToggleSingleParams(
+            ip=req["ip"],
+            is_active=req["is_active"],
+            luminance=req["luminance"],
+        )
+
+        bulb_settings = service.toggle_single_bulb(tag)
+
+        return Response(
+            response=json.dumps(bulb_settings), status=200, mimetype="text/plain"
+        )
+
+
+# TODO: turn on, szuould be toggle, and should be able to turn on and off
+# TODO: you should also check state of active bulbs.
 @homestation_app.route("/turn_on", methods=["POST"])
-def turn_on():
+def turn_on_preset():
     if request.is_json:
         req = request.get_json()
         tag = domain.TurnOnParams(tag=req["tag"])
@@ -60,7 +77,7 @@ def turn_on():
 
 
 @homestation_app.route("/turn_off", methods=["POST"])
-def turn_off():
+def turn_off_all():
     if request.is_json:
         req = request.get_json()
         tag = domain.TurnOffParams(ids=req["ids"])

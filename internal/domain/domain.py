@@ -9,6 +9,13 @@ class TurnOnParams:
 
 
 @dataclass
+class ToggleSingleParams:
+    ip: str
+    is_active: bool
+    luminance: int
+
+
+@dataclass
 class TurnOffParams:
     ids: List[str]
 
@@ -16,11 +23,21 @@ class TurnOffParams:
 @dataclass
 class BulbSettings:
     ip: str
+    is_active: bool
     luminance: int
-    type: str
 
 
 @dataclass
 class RepoResponse:
     settings: List[BulbSettings]
     to_turn_off: List[str]
+
+
+@dataclass
+class BulbModel:
+    id: str
+    ip: str
+    type: str
+    active: bool
+    luminance: int
+    preset: dict[str, int]

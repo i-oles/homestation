@@ -4,6 +4,8 @@
       "id": "salon_main_lamp",
       "ip": "192.168.0.15",
       "type": "white",
+      "is_active": false,
+      "luminance": 30,
       "preset": {
         "salon_main_lamp": 30,
         "cleaning": 10
@@ -13,6 +15,8 @@
       "id": "sofa_lamp",
       "ip": "192.168.0.20",
       "type": "white",
+      "is_active": false,
+      "luminance": 30,
       "preset": {
         "sofa_lamp": 30,
         "cozy": 10,
@@ -23,6 +27,8 @@
       "id": "table_lamp",
       "ip": "192.168.0.23",
       "type": "white",
+      "is_active": false,
+      "luminance": 30,
       "preset": {
         "table_lamp": 30,
         "cinema": 5,
