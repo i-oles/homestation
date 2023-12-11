@@ -13,9 +13,13 @@ class BulbRepoInterface(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def update_bulb_state(self, is_active: bool, ip: str):
+    def update_bulb_state(self, is_on: bool, ip: str):
         raise NotImplementedError
 
     @abstractmethod
     def update_bulb_luminance(self, luminance: int, ip: str):
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_all_ips(self) -> list[str]:
         raise NotImplementedError

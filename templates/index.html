@@ -7,20 +7,18 @@
     <title>Home</title>
 </head>
 <body>
-    {%for t in possible_tags%}
-        <form id="{{ t }}Form">
-            <button style="color: red" type="button" onclick="sendRequest('{{ t }}')">{{ t }}</button>
-        </form>
-    {%endfor%}
+    <form id="sofaLampForm">
+        <button type="button" onclick="sendRequest({{bulb_states.get('sofa_lamp')}})">sofa lamp</button>
+    </form>
 
     <script>
-        function sendRequest(tag) {
-            fetch('/turn_on', {
+        function sendRequest(bulbState) {
+            fetch('/toggle_single_bulb', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ tag: tag }),
+                body: JSON.stringify({ ip: bulbState.ip, is_on: bulbState.is_on }),
             })
             .then(response => response.json())
             .catch((error) => {

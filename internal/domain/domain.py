@@ -11,8 +11,7 @@ class TurnOnParams:
 @dataclass
 class ToggleSingleParams:
     ip: str
-    is_active: bool
-    luminance: int
+    is_on: bool
 
 
 @dataclass
@@ -24,7 +23,6 @@ class TurnOffParams:
 class BulbSettings:
     ip: str
     is_active: bool
-    luminance: int
 
 
 @dataclass
@@ -41,3 +39,10 @@ class BulbModel:
     active: bool
     luminance: int
     preset: dict[str, int]
+
+
+@dataclass
+class BulbState:
+    ip: str
+    is_on: bool
+    is_online: bool

@@ -46,15 +46,17 @@ class BulbRepo(BulbRepoInterface):
     #
     #     return all_bulbs
     #
-    def update_bulb_state(self, is_active: bool, ip: str):
+    def update_bulb_state(self, is_on: bool, ip: str):
         bulb = Query()
-        self.db.update({"is_active": is_active}, bulb.ip == ip)
+        self.db.update({"is_on": is_on}, bulb.ip == ip)
 
     def update_bulb_luminance(self, luminance: int, ip: str):
         bulb = Query()
         self.db.update({"luminance": luminance}, bulb.ip == ip)
 
-    #
+    def get_all_ips(self) -> list[str]:
+        return [bulb.get("ip") for bulb in self.db.all()]
+
     # def is_bulb_active(self, ip: str) -> bool:
     #     bulb = Query()
     #     bulb_data = self.db.search(bulb.ip == ip)
@@ -63,6 +65,14 @@ class BulbRepo(BulbRepoInterface):
     #         raise Exception("Bulb not found")
     #
     #     return bulb_data[0].get("active")
+    def get_id_by_ip(self, ip: str):
+        bulb = Query()
+        bulb_data = self.db.search(bulb.ip == ip)
+
+        if not bulb_data:
+            raise Exception("Bulb not found")
+
+        return bulb_data[0].get("id")
 
 
 
