@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <!-- ... -->
 </head>
 <body>
     <form id="sofaLampForm">
-        <button type="button" onclick="sendRequest({{bulb_states.get('sofa_lamp')}})">sofa lamp</button>
+        <button type="button" onclick="sendRequest('{{ bulb_states.get('sofa_lamp').ip }}')">sofa lamp</button>
+    </form>
+    <form id="tableLampForm">
+        <button type="button" onclick="sendRequest('{{ bulb_states.get('table_lamp').ip }}')">table lamp</button>
+    </form>
+    <form id="salonMainLampForm">
+        <button type="button" onclick="sendRequest('{{ bulb_states.get('salon_main_lamp').ip }}')">salon lamp</button>
     </form>
 
     <script>
-        function sendRequest(bulbState) {
-            fetch('/toggle_single_bulb', {
+        function sendRequest(ip) {
+            fetch('/toggle_single', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ ip: bulbState.ip, is_on: bulbState.is_on }),
+                body: JSON.stringify({ ip: ip }),
             })
             .then(response => response.json())
             .catch((error) => {
