@@ -57,8 +57,6 @@ def home():
 
         bulb_states[bulb_id] = bulb_state
 
-    print(bulb_states)
-
     return render_template("index.html", bulb_states=bulb_states)
 
 
@@ -70,7 +68,6 @@ def toggle_single():
         params = domain.ToggleSingleParams(
             ip=req["ip"],
             is_on=True,
-            # is_on=req["is_on"]
         )
 
         bulb_settings = service.toggle_single_bulb(params)
@@ -79,30 +76,6 @@ def toggle_single():
             response=json.dumps(bulb_settings), status=200, mimetype="text/plain"
         )
 
-
-# @homestation_app.route("/turn_on_preset", methods=["POST"])
-# def turn_on_preset():
-#     if request.is_json:
-#         req = request.get_json()
-#         tag = domain.TurnOnParams(tag=req["tag"])
-#         bulb_settings = service.turn_on(tag)
-#
-#         return Response(
-#             response=json.dumps(bulb_settings), status=200, mimetype="text/plain"
-#         )
-#
-#
-# @homestation_app.route("/turn_off_all", methods=["POST"])
-# def turn_off_all():
-#     if request.is_json:
-#         req = request.get_json()
-#         tag = domain.TurnOffParams(ids=req["ids"])
-#         ips_to_turn_off = service.turn_off(tag)
-#
-#         return Response(
-#             response=json.dumps(ips_to_turn_off), status=200, mimetype="text/plain"
-#         )
-#
 
 if __name__ == "__main__":
     homestation_app.run(debug=True)

@@ -8,17 +8,17 @@ def show_all_active_bulbs():
 
 
 def toggle_bulb():
-    bulb = Bulb('192.168.0.20')
+    bulb = Bulb("192.168.0.20")
     bulb.toggle()
 
 
 def get_properties():
-    bulb = Bulb('192.168.0.20')
+    bulb = Bulb("192.168.0.20")
     bulb.get_properties()
 
 
 def get_capabilities():
-    bulb = Bulb('192.168.0.20')
+    bulb = Bulb("192.168.0.20")
     print(bulb.get_capabilities().get("power"))
 
 
